@@ -26,7 +26,7 @@ def add_session_id_column(data_frame: DataFrame):
     """
     data = np.lexsort((data_frame["timestamp"], data_frame["customer_id"]))
     is_equal_previous_array = data_frame.customer_id[data].shift() == data_frame.customer_id[data]
-    is_less_previous_array = data_frame.timestamp[data] - data_frame.timestamp[data].shift() <= 60 * 5
+    is_less_previous_array = data_frame.timestamp[data] - data_frame.timestamp[data].shift() <= 3 * 60
     previous_equal_count = 0 + (is_equal_previous_array & is_less_previous_array)
     subtract_into_index = np.array(list(accumulate(
         previous_equal_count,
@@ -37,5 +37,5 @@ def add_session_id_column(data_frame: DataFrame):
     data_frame["session_id"] = data_frame["session_id"].astype(int)
 
 
-a: DataFrame = read_data_file("data10^8.csv")
+a: DataFrame = read_data_file("data.csv")
 add_session_id_column(a)
