@@ -15,7 +15,7 @@ def time_decorator(func):
 
 
 @time_decorator
-def read_data_file(filename="data.csv") -> DataFrame:
+def read_data_file(filename: str) -> DataFrame:
     return read_csv(filename)
 
 
